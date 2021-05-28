@@ -13,7 +13,8 @@ const spinner = document.querySelector('.spinner');
   // 	во втором then выведите в консоль полученный объект res, чтобы его изучить.
   // 	добавьте блок catch, внутри которого выведите в консоль сообщение: Ошибка: ${err}.
 form.addEventListener('submit', function submit(e) {
-  e.preventDefault();
+  e.preventDefault(); // Чтобы перезагрузки всей страницы не происходило, мы отменяли это стандартное поведение формы.
+                      //Таким обазом происходит обновление только части страницы после нажатия кнопки `submit`
     renderLoading(true)
   search(form.elements.entity.value, form.elements.entityId.value)
       .then((res) => {
@@ -21,7 +22,8 @@ form.addEventListener('submit', function submit(e) {
         else return Promise.reject(res.status);
       })
       //.then((res) => {return console.log(res.name) })
-      .then((res) => {renderResult(res.name) })
+      .then((res) => {console.log(res.name)
+          renderResult(res.name) })
       .catch((err)=> renderError(`Ошибка: ${err}`))//console.log(`Ошибка: ${err}`))
       .finally(()=> renderLoading(false))
 
